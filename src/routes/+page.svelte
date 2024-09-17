@@ -17,7 +17,7 @@
     let size = $state(50);
     let color = $state('#ff3e00');
 
-    let canvas;
+    let canvas: HTMLCanvasElement;
 
     let images = [
         {
@@ -74,10 +74,14 @@
     $effect(() => {
         const context = canvas.getContext('2d');
         context.clearRect(0, 0, canvas.width, canvas.height);
-        context.fillStyle = color;
-        setTimeout(() => {
-            context.fillRect(0, 0, size, size);
-        }, 0);
+        if (context) {
+            context.fillStyle = color;
+            setTimeout(() => {
+                if (context) {
+                    context.fillRect(0, 0, size, size);
+                }
+            }, 0);
+        }
     });
 </script>
 
